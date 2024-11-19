@@ -48,7 +48,7 @@ export const Landing = () => {
                 <div className="w-[50%] h-full border-r-4">   
                     <video className="h-full w-full object-cover" autoPlay ref={videoRef}></video>
                 </div>
-                <div className="w-[50%] h-full flex items-center  justify-center bg-[#DE5576]">
+                <div className="w-[50%] h-full flex items-center  justify-center bg-gradient-to-l from-gradientEnd to-gradientStart">
                     <button className="h-[80px] w-[350px] bg-slate-200 rounded-full text-2xl font-semibold" onClick={() => {
                         setJoined(true);
                     }}>Start Video Chat</button>

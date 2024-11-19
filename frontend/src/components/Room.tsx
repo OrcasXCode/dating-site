@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Socket, io } from "socket.io-client";
+import favicon from "../assets/omegle.png"
+import { Hearts } from 'react-loader-spinner'
 
 const URL = "http://localhost:3000";
 
@@ -200,11 +202,42 @@ export const Room = ({
     }, [localVideoRef])
 
     return (
-        <div className="bg-red-500 h-screen w-screen flex flex-row justify-center items-center">
-            <h1>Hi {name}</h1>
-            <video autoPlay width={400} height={400} ref={localVideoRef} />
-            {lobby ? "Waiting to connect you to someone" : null}
-            <video autoPlay width={400} height={400} ref={remoteVideoRef} />
+        // <div className="bg-red-500 h-screen w-screen flex flex-row justify-center items-center">
+        //     <h1>Hi {name}</h1>
+        //     <video autoPlay width={400} height={400} ref={localVideoRef} />
+        //     {lobby ? "Waiting to connect you to someone" : null}
+        //     <video autoPlay width={400} height={400} ref={remoteVideoRef} />
+        // </div>
+        <div className="h-screen w-screen">
+            <div className="h-[100px] bg-[#ffe8ec] flex justify-between items-center">
+                <svg width="200" height="150">
+                    <image href={favicon} width="200" height="150"></image>
+                </svg>
+                <div className="space-x-4">
+                    <button className="h-[80px] w-[250px] bg-gradient-to-l from-gradientEnd to-gradientStart rounded-full text-2xl font-semibold text-white ">Exit</button>
+                    <button className="h-[80px] w-[250px] bg-gradient-to-l from-gradientEnd to-gradientStart rounded-full text-2xl font-semibold text-white ">New Chat</button>
+                </div>
+            </div>
+            <div className="flex flex-row h-[calc(100vh-100px)]">
+                <div className="w-[50%] h-full border-r-4">   
+                    <video className="h-full w-full object-cover" autoPlay ref={localVideoRef}></video>
+                </div> 
+                <div className="w-[50%] h-full border-r-4 flex items-center justify-center">
+                    {lobby ? (
+                        <Hearts
+                            height="80"
+                            width="80"
+                            color="#C24865"
+                            ariaLabel="hearts-loading"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            visible={true}
+                        />
+                    ) : (
+                        <video className="h-full w-full object-cover" autoPlay ref={remoteVideoRef}></video>
+                    )}
+                </div>
+            </div>
         </div>
     );
 }
