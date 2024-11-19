@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom";
 import { Room } from "./Room";
+import favicon from "../assets/omegle.png"
 
 export const Landing = () => {
     const [name, setName] = useState("");
@@ -36,16 +37,25 @@ export const Landing = () => {
 
     if (!joined) {
             
-    return <div>
-            <video autoPlay ref={videoRef}></video>
-            <input type="text" onChange={(e) => {
-                setName(e.target.value);
-            }}>
-            </input>
-            <button onClick={() => {
-                setJoined(true);
-            }}>Join</button>
+    return <>
+        <div className="h-screen w-screen">
+            <div className="h-[100px] bg-[#fff5f7] flex justify-left items-center">
+                <svg width="200" height="150">
+                    <image href={favicon} width="200" height="150"></image>
+                </svg>
+            </div>
+            <div className="flex flex-row h-[calc(100vh-100px)]">
+                <div className="w-[50%] h-full border-r-4">   
+                    <video className="h-full w-full object-cover" autoPlay ref={videoRef}></video>
+                </div>
+                <div className="w-[50%] h-full flex items-center  justify-center bg-[#DE5576]">
+                    <button className="h-[80px] w-[350px] bg-slate-200 rounded-full text-2xl font-semibold" onClick={() => {
+                        setJoined(true);
+                    }}>Start Video Chat</button>
+                </div>
+            </div>
         </div>
+        </>
     }
 
     return <Room name={name} localAudioTrack={localAudioTrack} localVideoTrack={localVideoTrack} />
