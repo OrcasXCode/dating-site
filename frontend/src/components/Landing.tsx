@@ -4,6 +4,7 @@ import { Room } from "./Room";
 import favicon from "../assets/omegle.png"
 
 export const Landing = () => {
+    const [isOpen,setIsOpen]= useState(true);
     const [name, setName] = useState("");
     const [localAudioTrack, setLocalAudioTrack] = useState<MediaStreamTrack | null>(null);
     const [localVideoTrack, setlocalVideoTrack] = useState<MediaStreamTrack | null>(null);
@@ -35,9 +36,21 @@ export const Landing = () => {
         }
     }, [videoRef]);
 
+    const togglePopup=()=>{
+        setIsOpen(!isOpen);
+    }
+
     if (!joined) {
             
     return <>
+        <div>
+            {isOpen && (
+                <div>
+                    <h1>Select your gender</h1>
+                    <button onClick={togglePopup}>Submit</button>
+                </div>
+            )}
+        </div>
         <div className="h-screen w-screen">
             <div className="h-[100px] bg-[#fff5f7] flex justify-left items-center">
                 <svg width="200" height="150">
@@ -57,6 +70,5 @@ export const Landing = () => {
         </div>
         </>
     }
-
     return <Room name={name} localAudioTrack={localAudioTrack} localVideoTrack={localVideoTrack} />
 }
